@@ -38,6 +38,17 @@ scoop bucket add dorado https://github.com/chawyehsu/dorado
 scoop bucket add Ash258 https://github.com/Ash258/Scoop-Ash258.git
 scoop update
 
+# Setup scoop
+scoop install aria2
+scoop config aria2-enabled true
+scoop config aria2-retry-wait 4
+scoop config aria2-split 16
+scoop config aria2-max-connection-per-server 16
+scoop config aria2-min-split-size 4M
+
+# disable if on VPN
+# scoop config aria2-enabled false 
+
 # #### <- PREREQUISITES ####
 
 # ######## -> ENVIRONMENT CONFIGURATION ########
@@ -87,6 +98,12 @@ $Apps = @(
     "totalcommander",
     "texmaker",
     "portable-virtualbox",
+    "yuque",
+    "wechat",
+    "grammarly",
+    "tencent-meeting",
+    "neteasemusic",
+    "translucenttb",
 
     # Utils
     "latex",
@@ -98,6 +115,7 @@ $Apps = @(
     "zip",
     "unzip",
     "scoop-search",
+    "scoop-completion",
     "python",
     "nvm",
     "r",
@@ -121,7 +139,8 @@ foreach ($app in $Apps)
 
 # Post process
 
-
+# Enable auto completion for scoop install
+Add-Content -Path $Profile -Value "`nImport-Module $env:USERPROFILE\scoop\modules\scoop-completion"
 
 Write-Host "Installed common tools using scoop" -Foreground green
 ######## <- COMMON TOOLS CONFIGURATION ########
