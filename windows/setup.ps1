@@ -1,5 +1,6 @@
 #### -> HELPER FUNCTIONS ####
-function Check-Command($cmdname) {
+function Check-Command($cmdname)
+{
     return [bool](Get-Command -Name $cmdname -ErrorAction SilentlyContinue)
 }
 
@@ -9,19 +10,21 @@ function Check-Command($cmdname) {
 
 Set-ExecutionPolicy Bypass -Scope Process -Force; 
 
-if (Check-Command -cmdname 'Install-BoxstarterPackage') {
+if (Check-Command -cmdname 'Install-BoxstarterPackage')
+{
     Write-Host "Boxstarter is already installed, skip installation."
-}
-else {
+} else
+{
     Write-Host "Installing Boxstarter..."
     Write-Host "------------------------------------" 
     . { iwr -useb https://boxstarter.org/bootstrapper.ps1 } | iex; Get-Boxstarter -Force
     Write-Host "Installed Boxstarter" -ForegroundColor Green
 }
-if (Check-Command -cmdname 'scoop') {
+if (Check-Command -cmdname 'scoop')
+{
     Write-Host "Scoop is already installed, attempt to update it."    
-}
-else {
+} else
+{
     Write-Host "Installing scoop..."
     Write-Host "------------------------------------"
     iwr -useb https://get.scoop.sh | iex
@@ -32,6 +35,7 @@ scoop install git
 scoop bucket add extras
 scoop bucket add scoopet https://github.com/integzz/scoopet
 scoop bucket add dorado https://github.com/chawyehsu/dorado
+scoop bucket add Ash258 https://github.com/Ash258/Scoop-Ash258.git
 scoop update
 
 # #### <- PREREQUISITES ####
@@ -110,7 +114,8 @@ $Apps = @(
     "psutils"
 )
 
-foreach ($app in $Apps) {
+foreach ($app in $Apps)
+{
     scoop install $app
 } 
 
