@@ -19,21 +19,20 @@ else {
     Write-Host "Installed Boxstarter" -ForegroundColor Green
 }
 if (Check-Command -cmdname 'scoop') {
-    Write-Host "Scoop is already installed, attempt to update it."
-    scoop install git
-    scoop bucket add extras
-    scoop update
-    
+    Write-Host "Scoop is already installed, attempt to update it."    
 }
 else {
     Write-Host "Installing scoop..."
     Write-Host "------------------------------------"
     iwr -useb https://get.scoop.sh | iex
-    scoop install git
-    scoop bucket add extras
-    scoop update
     Write-Host "Installed Scoop" -ForegroundColor Green
 }
+
+scoop install git
+scoop bucket add extras
+scoop bucket add scoopet https://github.com/integzz/scoopet
+scoop bucket add dorado https://github.com/chawyehsu/dorado
+scoop update
 
 # #### <- PREREQUISITES ####
 
@@ -106,7 +105,7 @@ $Apps = @(
     "youtube-dl",
     "7zip",
     "git",
-    "cygwin",
+    # "cygwin", hash check failed
     "xming",
     "psutils"
 )
