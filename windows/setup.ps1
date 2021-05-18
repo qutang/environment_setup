@@ -119,3 +119,18 @@ foreach ($app in $Apps) {
 
 Write-Host "Installed common tools using scoop" -Foreground green
 ######## <- COMMON TOOLS CONFIGURATION ########
+
+#######  -> POST PROCESS ########
+Write-Host "Setup system using the installed scripts"
+
+Write-Host "Setup node"
+nvm install node
+nvm use node
+node --version
+
+Write-Host "Setup python"
+python3 -m pip install --user pipx
+python3 -m pipx ensurepath
+
+
+####### <- POST PROCESS #########
