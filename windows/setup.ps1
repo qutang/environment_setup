@@ -104,6 +104,8 @@ $Apps = @(
     "tencent-meeting",
     "neteasemusic",
     "translucenttb",
+    "lxmusic",
+    "aria-ng-gui",
 
     # Utils
     "latex",
