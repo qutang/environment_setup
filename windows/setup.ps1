@@ -7,15 +7,8 @@ function Check-Command($cmdname) {
 
 #### -> PREREQUISITES ####
 
-if (Check-Command -cmdname 'choco') {
-    Write-Host "Choco is already installed, skip installation."
-}
-else {
-    Write-Host "Installing Chocolatey first..."
-    Write-Host "------------------------------------" 
-    Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-    Write-Host "Installed Chocolatey" -ForegroundColor Green
-}
+Set-ExecutionPolicy Bypass -Scope Process -Force; 
+
 if (Check-Command -cmdname 'Install-BoxstarterPackage') {
     Write-Host "Boxstarter is already installed, skip installation."
 }
@@ -26,12 +19,17 @@ else {
     Write-Host "Installed Boxstarter" -ForegroundColor Green
 }
 if (Check-Command -cmdname 'scoop') {
-    Write-Host "Scoop is already installed, skip installation."
+    Write-Host "Scoop is already installed, attempt to update it."
+    scoop bucket add extras
+    scoop update
+    
 }
 else {
     Write-Host "Installing scoop..."
-    Write-Host "------------------------------------" 
-    iwr -useb https://get.scoop.sh | iex
+    Write-Host "------------------------------------"
+    Set-ExecutionPolicy RemoteSigned -scope CurrentUser | iwr -useb https://get.scoop.sh | iex
+    scoop bucket add extras
+    scoop update
     Write-Host "Installed Scoop" -ForegroundColor Green
 }
 
@@ -56,104 +54,68 @@ Set-WindowsExplorerOptions -EnableShowHiddenFilesFoldersDrives -EnableShowProtec
 
 # ######## <- ENVIRONMENT CONFIGURATION ########
 
-# ######## -> Install using native windows store #########
-Write-Host "Installing softwares using Windows "
-
-# ######## <- Install using native windows store #########
-
 # ######## -> COMMON TOOLS CONFIGURATION ########
-Write-Host "Installing common tools using choco"
+Write-Host "Installing common tools using scoop"
 
 $Apps = @(
-    #Browsers
-    "microsoft-edge",
-    "googlechrome",
-    "firefox",
-    
-    #Communications
-    "skype",
-    "microsoft-teams.install",
-    #"teamviewer",
-    
-    #Editing
-    "notepadplusplus.install",
-    "grammarly",
-    
-    # Media players and production
-    "vlc",
-    #"kdenlive", # Supports standalone 
+    # Extras
+    "zoom",
+    "vscode-insiders",
+    "android-studio",
+    "rstudio",
     "obs-studio",
-    
-    # Network & Debugging
-    "fiddler",
-    "logparser",
-    "postman",
-    "sysinternals",
-    "wget",
-    "wireshark",
-
-    #office
-    "powerbi",
-
-    #Scriptings
-    "powershell-core",
-    
-    #Utils
+    "vlc",
     "filezilla",
-    "greenshot"
+    "screentogif",
+    "mobaxterm",
+    "inno-setup",
+    "everything",
+    "spacesniffer",
+    "audacity",
+    "windows-terminal",
+    "github",
+    "steam",
+    "whatsapp",
+    "powertoys",
+    "jamovi",
+    "quicklook",
+    "totalcommander",
+    "texmaker",
+    "portable-virtualbox",
 
-    #"lightshot.install",
+    # Utils
+    "latex",
+    "ruby",
+    "which",
+    "grep",
+    "make",
+    "perl",
+    "zip",
+    "unzip",
+    "scoop-search",
+    "python",
+    "nvm",
+    "r",
+    "wget",
+    "curl",
+    "yarn",
+    "graphviz",
+    "rtools",
+    "youtube-dl",
+    "7zip",
+    "git",
+    "cygwin",
+    "xming",
+    "psutils"
 )
 
 foreach ($app in $Apps) {
-    cinst $app -y
+    scoop install $app
 } 
-Write-Host "Installed common tools" -Foreground green
+
+# Post process
+
+
+
+Write-Host "Installed common tools using scoop" -Foreground green
 ######## <- COMMON TOOLS CONFIGURATION ########
-
-######## -> DEV TOOLS CONFIGURATION ########
-Write-Host "Installing dev tools using choco"
-$devTools = @(
-    #Editors
-    "vscode",
-    #Version control    
-    "git",
-    #.Net
-    "dotnetcore-sdk",
-    "dotpeek",
-    "debugdiagnostic",
-    #Uncomment below line for service fabric
-    #"service-fabric-explorer",
-    #NodeJS
-    "nodejs-lts",
-    #Python
-    "python3",
-    #Database
-    "ssms",
-    # hosting on cloud
-    "azure-cli",
-    # Diagramming
-    "graphviz"
-)
-foreach ($devTool in $devTools) {
-    cinst $devTool -y
-}
-
-###### -> Install VS Code Extensions #######
-$vsCodeExtensions = @(
-    "jebbs.plantuml",
-    "evilz.vscode-reveal",
-    "streetsidesoftware.code-spell-checker",
-    "ms-azuretools.vscode-docker"
-)
-Write-Host "Installing VS Code extensions"
-$vsCodeExtensions | ForEach-Object { code --install-extension $_ }
-Write-Host "Installed VS Code Extensions" -Foreground green
-Write-Host "Installed dev tools" -Foreground green
-######## <- DEV TOOLS CONFIGURATION ########
-
-#### -> PERSONALIZE ####
-git config --global user.email "joymon@gmail.com"
-git config --global user.name "Joy George Kunjikkuru"
-
-#### <- PERSONALIZE ####
