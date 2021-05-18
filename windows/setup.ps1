@@ -27,7 +27,7 @@ if (Check-Command -cmdname 'scoop') {
 else {
     Write-Host "Installing scoop..."
     Write-Host "------------------------------------"
-    Set-ExecutionPolicy RemoteSigned -scope CurrentUser | iwr -useb https://get.scoop.sh | iex
+    iwr -useb https://get.scoop.sh | iex
     scoop bucket add extras
     scoop update
     Write-Host "Installed Scoop" -ForegroundColor Green
