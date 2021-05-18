@@ -21,6 +21,7 @@ else {
 if (Check-Command -cmdname 'scoop') {
     Write-Host "Scoop is already installed, attempt to update it."
     scoop bucket add extras
+    scoop install git
     scoop update
     
 }
@@ -29,6 +30,7 @@ else {
     Write-Host "------------------------------------"
     iwr -useb https://get.scoop.sh | iex
     scoop bucket add extras
+    scoop install git
     scoop update
     Write-Host "Installed Scoop" -ForegroundColor Green
 }
