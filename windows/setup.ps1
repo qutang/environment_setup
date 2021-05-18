@@ -1,6 +1,5 @@
 #### -> HELPER FUNCTIONS ####
-function Check-Command($cmdname)
-{
+function Check-Command($cmdname) {
     return [bool](Get-Command -Name $cmdname -ErrorAction SilentlyContinue)
 }
 
@@ -10,21 +9,19 @@ function Check-Command($cmdname)
 
 Set-ExecutionPolicy Bypass -Scope Process -Force; 
 
-if (Check-Command -cmdname 'Install-BoxstarterPackage')
-{
+if (Check-Command -cmdname 'Install-BoxstarterPackage') {
     Write-Host "Boxstarter is already installed, skip installation."
-} else
-{
+}
+else {
     Write-Host "Installing Boxstarter..."
     Write-Host "------------------------------------" 
     . { iwr -useb https://boxstarter.org/bootstrapper.ps1 } | iex; Get-Boxstarter -Force
     Write-Host "Installed Boxstarter" -ForegroundColor Green
 }
-if (Check-Command -cmdname 'scoop')
-{
+if (Check-Command -cmdname 'scoop') {
     Write-Host "Scoop is already installed, attempt to update it."    
-} else
-{
+}
+else {
     Write-Host "Installing scoop..."
     Write-Host "------------------------------------"
     iwr -useb https://get.scoop.sh | iex
@@ -134,15 +131,16 @@ $Apps = @(
     "psutils"
 )
 
-foreach ($app in $Apps)
-{
+foreach ($app in $Apps) {
     scoop install $app
 } 
 
 # Post process
 
-# Enable auto completion for scoop install
+# Enable auto completion for scoop
 Add-Content -Path $Profile -Value "`nImport-Module $env:USERPROFILE\scoop\modules\scoop-completion"
+# Enable super fast scoop search
+Add-Content -Path $Profile -Value "Invoke-Expression (&scoop-search --hook)"
 
 Write-Host "Installed common tools using scoop" -Foreground green
 ######## <- COMMON TOOLS CONFIGURATION ########
