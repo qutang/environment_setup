@@ -139,7 +139,8 @@ $Apps = @(
     "ffmpeg",
     "pandoc",
     "main/docker",
-    "oraclejre8"
+    "oraclejre8",
+    "msys2"
 )
 
 foreach ($app in $Apps)
