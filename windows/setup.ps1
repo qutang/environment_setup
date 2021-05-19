@@ -120,7 +120,7 @@ $Apps = @(
     "scoop-search",
     "scoop-completion",
     "python",
-    "nvm",
+    "nodejs",
     "r",
     "wget",
     "curl",
