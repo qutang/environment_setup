@@ -7,3 +7,6 @@
    2. Set the git path in Rstudio's Global Options dialog to `C:\Users\[username]\scoop\apps\git\current\bin\git.exe` instead of using the shim shortcut cmdlet to avoid a known [issue](https://github.com/lukesampson/scoop/issues/1028#issuecomment-843650134).
 3. Setup msys2
    1. Running `msys2` in the console to complete the setup.
+4. Setup Locale-Emulator
+   1. Open START Menu and run `LEInstaller` to complete installation.
+   2. Install for current user.

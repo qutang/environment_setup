@@ -1,6 +1,5 @@
 #### -> HELPER FUNCTIONS ####
-function Check-Command($cmdname)
-{
+function Check-Command($cmdname) {
     return [bool](Get-Command -Name $cmdname -ErrorAction SilentlyContinue)
 }
 
@@ -10,21 +9,19 @@ function Check-Command($cmdname)
 
 Set-ExecutionPolicy Bypass -Scope Process -Force; 
 
-if (Check-Command -cmdname 'Install-BoxstarterPackage')
-{
+if (Check-Command -cmdname 'Install-BoxstarterPackage') {
     Write-Host "Boxstarter is already installed, skip installation."
-} else
-{
+}
+else {
     Write-Host "Installing Boxstarter..."
     Write-Host "------------------------------------" 
     . { iwr -useb https://boxstarter.org/bootstrapper.ps1 } | iex; Get-Boxstarter -Force
     Write-Host "Installed Boxstarter" -ForegroundColor Green
 }
-if (Check-Command -cmdname 'scoop')
-{
+if (Check-Command -cmdname 'scoop') {
     Write-Host "Scoop is already installed, attempt to update it."    
-} else
-{
+}
+else {
     Write-Host "Installing scoop..."
     Write-Host "------------------------------------"
     iwr -useb https://get.scoop.sh | iex
@@ -92,7 +89,6 @@ $Apps = @(
     "windows-terminal",
     "github",
     "steam",
-    "whatsapp",
     "powertoys",
     "jamovi",
     "quicklook",
@@ -109,6 +105,7 @@ $Apps = @(
     "aria-ng-gui",
     "inkscape",
     "bilibili-livehime",
+    "locale-emulator",
 
     # Utils
     "pshazz",
@@ -140,11 +137,13 @@ $Apps = @(
     "pandoc",
     "main/docker",
     "oraclejre8",
-    "msys2"
+    "msys2",
+    "android-sdk",
+    "syncthing",
+    "cwrsync" # rsync replacement on Windows
 )
 
-foreach ($app in $Apps)
-{
+foreach ($app in $Apps) {
     scoop install $app
 } 
 
@@ -171,8 +170,15 @@ nvm on
 node --version
 
 Write-Host "Setup python"
-python3 -m pip install --user pipx
-python3 -m pipx ensurepath
+pip install nox
 
 
 ####### <- POST PROCESS #########
+
+####### -> CLEAN UP ##########
+
+Write-Host "Clean up scoop cache"
+scoop cache rm *
+scoop cleanup *
+
+####### <- CLEAN UP ##########
