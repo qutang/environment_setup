@@ -10,3 +10,6 @@
 4. Setup Locale-Emulator
    1. Open START Menu and run `LEInstaller` to complete installation.
    2. Install for current user.
+5. Run "TranslucentTB" to setup auto start on login.
+6. Run "quicklook" to setup auto start on login.
+7. Run "PowerToys" to setup auto start on login.
