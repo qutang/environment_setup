@@ -7,7 +7,7 @@ function Check-Command($cmdname) {
 
 #### -> PREREQUISITES ####
 
-Set-ExecutionPolicy Bypass -Scope Process -Force; 
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 
 if (Check-Command -cmdname 'Install-BoxstarterPackage') {
     Write-Host "Boxstarter is already installed, skip installation."
@@ -24,26 +24,27 @@ if (Check-Command -cmdname 'scoop') {
 else {
     Write-Host "Installing scoop..."
     Write-Host "------------------------------------"
-    iwr -useb https://get.scoop.sh | iex
+    iwr -useb 'https://raw.githubusercontent.com/scoopinstaller/install/master/install.ps1' | iex
     Write-Host "Installed Scoop" -ForegroundColor Green
 }
 
-scoop install git
+scoop install git sudo aria2
 scoop bucket add extras
 scoop bucket add scoopet https://github.com/integzz/scoopet
 scoop bucket add dorado https://github.com/chawyehsu/dorado
 scoop bucket add Ash258 https://github.com/Ash258/Scoop-Ash258.git
 scoop bucket add java
+scoop bucket add JetBrains
+scoop bucket add versions
 scoop update
 
 # Setup scoop
-scoop install aria2
 scoop config aria2-enabled true
 scoop config aria2-retry-wait 4
 scoop config aria2-split 16
 scoop config aria2-max-connection-per-server 16
 scoop config aria2-min-split-size 4M
-
+scoop update
 # disable if on VPN
 # scoop config aria2-enabled false 
 
@@ -73,7 +74,6 @@ Write-Host "Installing common tools using scoop"
 
 $Apps = @(
     # Extras
-    "zoom",
     "vscode-insiders",
     "android-studio",
     "rstudio",
@@ -92,7 +92,7 @@ $Apps = @(
     "powertoys",
     "jamovi",
     "quicklook",
-    "totalcommander",
+    "extras/totalcommander",
     "texmaker",
     "portable-virtualbox",
     "yuque",
@@ -101,7 +101,7 @@ $Apps = @(
     "tencent-meeting",
     "neteasemusic",
     "translucenttb",
-    "lxmusic",
+    "lxmusic -s",
     "aria-ng-gui",
     "inkscape",
     "bilibili-livehime",
@@ -128,9 +128,7 @@ $Apps = @(
     "graphviz",
     "rtools",
     "youtube-dl",
-    "7zip",
-    "git",
-    # "cygwin", hash check failed
+    "cygwin -s",
     "xming",
     "psutils",
     "ffmpeg",
@@ -172,6 +170,9 @@ node --version
 Write-Host "Setup python"
 pip install nox
 
+Write-Host "Setup git"
+git config --global user.name "qutang"
+git config --global user.email "qu.tang@outlook.com"
 
 ####### <- POST PROCESS #########
 
