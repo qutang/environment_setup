@@ -1,5 +1,6 @@
 #### -> HELPER FUNCTIONS ####
-function Check-Command($cmdname) {
+function Check-Command($cmdname)
+{
     return [bool](Get-Command -Name $cmdname -ErrorAction SilentlyContinue)
 }
 
@@ -9,19 +10,21 @@ function Check-Command($cmdname) {
 
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 
-if (Check-Command -cmdname 'Install-BoxstarterPackage') {
+if (Check-Command -cmdname 'Install-BoxstarterPackage')
+{
     Write-Host "Boxstarter is already installed, skip installation."
-}
-else {
+} else
+{
     Write-Host "Installing Boxstarter..."
     Write-Host "------------------------------------" 
     . { iwr -useb https://boxstarter.org/bootstrapper.ps1 } | iex; Get-Boxstarter -Force
     Write-Host "Installed Boxstarter" -ForegroundColor Green
 }
-if (Check-Command -cmdname 'scoop') {
+if (Check-Command -cmdname 'scoop')
+{
     Write-Host "Scoop is already installed, attempt to update it."    
-}
-else {
+} else
+{
     Write-Host "Installing scoop..."
     Write-Host "------------------------------------"
     iwr -useb 'https://raw.githubusercontent.com/scoopinstaller/install/master/install.ps1' | iex
@@ -99,7 +102,7 @@ $Apps = @(
     "wechat",
     "grammarly",
     "tencent-meeting",
-    "neteasemusic",
+    "dorado/neteasemusic",
     "translucenttb",
     "lxmusic -s",
     "aria-ng-gui",
@@ -107,6 +110,10 @@ $Apps = @(
     "bilibili-livehime",
     "locale-emulator",
     "dorado/wechatwork",
+    "extras/vcredist2019",
+    "dorado/qq",
+    "dorado/qqmusic",
+    "winaero-tweaker",
 
     # Utils
     "pshazz",
@@ -143,9 +150,12 @@ $Apps = @(
     "scoopet/winget"
 )
 
-foreach ($app in $Apps) {
+foreach ($app in $Apps)
+{
     scoop install $app
 } 
+
+scoop uninstall vcredist2019
 
 Write-Host "Installed common tools using scoop" -Foreground green
 ######## <- COMMON TOOLS CONFIGURATION ########
@@ -157,12 +167,11 @@ $Apps = @(
     "Zoom.Zoom",
     "WhatsApp",
     "Microsoft.Teams",
-    "Tencent.QQ",
-    "Netease.CloudMusic",
     "Microsoft.VisualStudio.2019.Community"
 )
 
-foreach ($app in $Apps) {
+foreach ($app in $Apps)
+{
     winget install $app
 } 
 
