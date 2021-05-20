@@ -106,6 +106,7 @@ $Apps = @(
     "inkscape",
     "bilibili-livehime",
     "locale-emulator",
+    "dorado/wechatwork",
 
     # Utils
     "pshazz",
@@ -138,7 +139,8 @@ $Apps = @(
     "msys2",
     "android-sdk",
     "syncthing",
-    "cwrsync" # rsync replacement on Windows
+    "cwrsync", # rsync replacement on Windows
+    "scoopet/winget"
 )
 
 foreach ($app in $Apps) {
@@ -147,6 +149,25 @@ foreach ($app in $Apps) {
 
 Write-Host "Installed common tools using scoop" -Foreground green
 ######## <- COMMON TOOLS CONFIGURATION ########
+
+# ######## -> WINGET TOOLS CONFIGURATION ########
+Write-Host "Installing softwares using winget"
+
+$Apps = @(
+    "Zoom.Zoom",
+    "WhatsApp",
+    "Microsoft.Teams",
+    "Tencent.QQ",
+    "Netease.CloudMusic",
+    "Microsoft.VisualStudio.2019.Community"
+)
+
+foreach ($app in $Apps) {
+    winget install $app
+} 
+
+Write-Host "Installed softwares using winget" -Foreground green
+######## <- WINGET TOOLS CONFIGURATION ########
 
 #######  -> POST PROCESS ########
 Write-Host "Setup system using the installed scripts"

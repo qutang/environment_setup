@@ -1,4 +1,3 @@
-
 # Steps
 
 1. Install by clicking [here](https://boxstarter.org/package/nr/url?https://raw.githubusercontent.com/qutang/environment_setup/main/windows/setup.ps1).
@@ -13,3 +12,25 @@
 5. Run "TranslucentTB" to setup auto start on login.
 6. Run "quicklook" to setup auto start on login.
 7. Run "PowerToys" to setup auto start on login.
+8. Setup winget
+   1. Run `winget settings` to open settings file.
+
+   ```json
+   {
+      "$schema": "https://aka.ms/winget-settings.schema.json",
+
+      // For documentation on these settings, see: https://aka.ms/winget-settings
+      "source": {
+         "autoUpdateIntervalInMinutes": 5
+      },
+      "experimentalFeatures": {
+         "experimentalCmd": true,
+         "experimentalArg": true,
+         "experimentalMSStore": true,
+         "list": true,
+         "upgrade": true,
+         "uninstall": true,
+         "restSource": true
+      }
+   }
+   ```
