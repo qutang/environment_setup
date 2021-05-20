@@ -1,5 +1,5 @@
 #### -> HELPER FUNCTIONS ####
-function Check-Command($cmdname)
+function Test-Command($cmdname)
 {
     return [bool](Get-Command -Name $cmdname -ErrorAction SilentlyContinue)
 }
@@ -10,24 +10,24 @@ function Check-Command($cmdname)
 
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 
-if (Check-Command -cmdname 'Install-BoxstarterPackage')
+if (Test-Command -cmdname 'Install-BoxstarterPackage')
 {
     Write-Host "Boxstarter is already installed, skip installation."
 } else
 {
     Write-Host "Installing Boxstarter..."
     Write-Host "------------------------------------" 
-    . { iwr -useb https://boxstarter.org/bootstrapper.ps1 } | iex; Get-Boxstarter -Force
+    . { Invoke-WebRequest -useb https://boxstarter.org/bootstrapper.ps1 } | Invoke-Expression; Get-Boxstarter -Force
     Write-Host "Installed Boxstarter" -ForegroundColor Green
 }
-if (Check-Command -cmdname 'scoop')
+if (Test-Command -cmdname 'scoop')
 {
     Write-Host "Scoop is already installed, attempt to update it."    
 } else
 {
     Write-Host "Installing scoop..."
     Write-Host "------------------------------------"
-    iwr -useb 'https://raw.githubusercontent.com/scoopinstaller/install/master/install.ps1' | iex
+    Invoke-WebRequest -useb 'https://raw.githubusercontent.com/scoopinstaller/install/master/install.ps1' | Invoke-Expression
     Write-Host "Installed Scoop" -ForegroundColor Green
 }
 
