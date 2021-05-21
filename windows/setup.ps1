@@ -1,5 +1,6 @@
 #### -> HELPER FUNCTIONS ####
-function Test-Command($cmdname) {
+function Test-Command($cmdname)
+{
     return [bool](Get-Command -Name $cmdname -ErrorAction SilentlyContinue)
 }
 
@@ -9,19 +10,21 @@ function Test-Command($cmdname) {
 
 Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
 
-if (Test-Command -cmdname 'Install-BoxstarterPackage') {
+if (Test-Command -cmdname 'Install-BoxstarterPackage')
+{
     Write-Host "Boxstarter is already installed, skip installation."
-}
-else {
+} else
+{
     Write-Host "Installing Boxstarter..."
     Write-Host "------------------------------------" 
     . { Invoke-WebRequest -useb https://boxstarter.org/bootstrapper.ps1 } | Invoke-Expression; Get-Boxstarter -Force
     Write-Host "Installed Boxstarter" -ForegroundColor Green
 }
-if (Test-Command -cmdname 'scoop') {
+if (Test-Command -cmdname 'scoop')
+{
     Write-Host "Scoop is already installed, attempt to update it."    
-}
-else {
+} else
+{
     Write-Host "Installing scoop..."
     Write-Host "------------------------------------"
     Invoke-WebRequest -useb 'https://raw.githubusercontent.com/scoopinstaller/install/master/install.ps1' | Invoke-Expression
@@ -148,7 +151,8 @@ $Apps = @(
     "scoopet/winget"
 )
 
-foreach ($app in $Apps) {
+foreach ($app in $Apps)
+{
     scoop install $app
 } 
 
@@ -167,7 +171,8 @@ $Apps = @(
     "Microsoft.VisualStudio.2019.Community"
 )
 
-foreach ($app in $Apps) {
+foreach ($app in $Apps)
+{
     winget install $app
 } 
 
