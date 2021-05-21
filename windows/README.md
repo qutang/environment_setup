@@ -24,12 +24,7 @@
          "autoUpdateIntervalInMinutes": 5
       },
       "experimentalFeatures": {
-         "experimentalCmd": true,
-         "experimentalArg": true,
          "experimentalMSStore": true,
-         "list": true,
-         "upgrade": true,
-         "uninstall": true,
          "restSource": true
       }
    }
