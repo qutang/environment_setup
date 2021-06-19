@@ -1,4 +1,6 @@
-# Steps
+# Instruction
+
+## Steps
 
 1. Install by clicking [here](https://boxstarter.org/package/nr/url?https://raw.githubusercontent.com/qutang/environment_setup/main/windows/setup.ps1).
 2. Setup Rstudio manually
@@ -29,3 +31,15 @@
       }
    }
    ```
+
+## Manually install
+
+1. vscode-insider
+2. 腾讯会议
+3. 网易云
+4. QQ
+5. 微信
+6. 企业微信
+7. QQ音乐
+8. 语雀
+9. Wegame

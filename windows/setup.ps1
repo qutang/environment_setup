@@ -94,7 +94,6 @@ $Apps = @(
     "extras/totalcommander",
     "texmaker",
     "portable-virtualbox",
-    "yuque",
     "grammarly",
     "translucenttb",
     "lxmusic -s",
