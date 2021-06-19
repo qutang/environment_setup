@@ -103,6 +103,7 @@ $Apps = @(
     "locale-emulator",
     "extras/vcredist2019",
     "winaero-tweaker",
+    "ventoy",
 
     # Utils
     "pshazz",
