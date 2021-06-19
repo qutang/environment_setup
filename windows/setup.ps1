@@ -74,7 +74,6 @@ Write-Host "Installing common tools using scoop"
 
 $Apps = @(
     # Extras
-    "vscode-insiders",
     "android-studio",
     "rstudio",
     "obs-studio",
@@ -96,22 +95,15 @@ $Apps = @(
     "texmaker",
     "portable-virtualbox",
     "yuque",
-    "wechat",
     "grammarly",
-    "tencent-meeting",
-    "dorado/neteasemusic",
     "translucenttb",
     "lxmusic -s",
     "aria-ng-gui",
     "inkscape",
     "bilibili-livehime",
     "locale-emulator",
-    "dorado/wechatwork",
     "extras/vcredist2019",
-    "dorado/qq",
-    "dorado/qqmusic",
     "winaero-tweaker",
-    "skype",
 
     # Utils
     "pshazz",
