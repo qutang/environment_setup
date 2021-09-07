@@ -84,6 +84,7 @@ $Apps = @(
     "inno-setup",
     "everything",
     "spacesniffer",
+    "dark",
     "audacity",
     "windows-terminal",
     "github",
@@ -93,7 +94,6 @@ $Apps = @(
     "quicklook",
     "extras/totalcommander",
     "texmaker",
-    "portable-virtualbox",
     "grammarly",
     "translucenttb",
     "lxmusic -s",
@@ -104,8 +104,20 @@ $Apps = @(
     "extras/vcredist2019",
     "winaero-tweaker",
     "ventoy",
+    "aria-ng-gui",
+    "innounp",
+    "lessmsi",
+    "neteasemusic",
+    "qq",
+    "qqmusic",
+    "skype",
+    "wechatwork",
+    "wechat",
+    "winfetch",
+    "yuque",
 
     # Utils
+    "busybox",
     "pshazz",
     "latex",
     "ruby",
@@ -114,11 +126,16 @@ $Apps = @(
     "make",
     "perl",
     "zip",
+    "7zip",
+    "openjdk11",
+    "oraclejre8",
     "unzip",
     "scoop-search",
     "scoop-completion",
     "python",
+    "python37",
     "nodejs",
+    "nodejs-lts",
     "r",
     "wget",
     "curl",
@@ -135,9 +152,13 @@ $Apps = @(
     "oraclejre8",
     "msys2",
     "android-sdk",
+    "adb",
+    "cacert",
+    "imagemagick",
     "syncthing",
     "cwrsync", # rsync replacement on Windows
-    "scoopet/winget"
+    "scoopet/winget",
+    "vscode-insiders-portable"
 )
 
 foreach ($app in $Apps) {
